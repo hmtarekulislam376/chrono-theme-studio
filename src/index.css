@@ -1,96 +1,226 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Nunito:wght@300;400;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
-
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-
-    --radius: 0.5rem;
-
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* Anime Vibe Theme */
+    --anime-primary: 320 100% 70%;
+    --anime-secondary: 270 100% 75%;
+    --anime-accent: 350 100% 80%;
+    --anime-glow: 320 100% 70%;
+    --anime-text: 0 0% 100%;
+    --anime-glass: 320 50% 90%;
+    
+    /* Minimalist Dark Theme */
+    --minimal-bg: 220 10% 8%;
+    --minimal-surface: 220 8% 12%;
+    --minimal-text: 0 0% 95%;
+    --minimal-border: 220 10% 20%;
+    --minimal-accent: 0 0% 100%;
+    
+    /* Cyber Neon Theme */
+    --cyber-primary: 180 100% 50%;
+    --cyber-secondary: 300 100% 60%;
+    --cyber-accent: 45 100% 50%;
+    --cyber-glow: 180 100% 50%;
+    --cyber-text: 0 0% 100%;
+    --cyber-dark: 220 20% 5%;
+    
+    /* Glass Effects */
+    --glass-bg: rgba(255, 255, 255, 0.1);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --glass-blur: 20px;
+    
+    /* Animations */
+    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-fast: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    --glow-intensity: 0 0 20px;
+    --pulse-glow: 0 0 40px;
   }
 
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+  * {
+    @apply border-border;
+  }
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+  body {
+    @apply bg-background text-foreground overflow-hidden;
+    font-family: 'Nunito', sans-serif;
+  }
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+  .font-cyber {
+    font-family: 'Orbitron', monospace;
+  }
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+  .font-anime {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 600;
+  }
+}
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+@layer components {
+  /* Glass Effects */
+  .glass-anime {
+    background: linear-gradient(135deg, 
+      hsla(var(--anime-glass), 0.15) 0%, 
+      hsla(var(--anime-primary), 0.1) 100%);
+    backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid hsla(var(--anime-primary), 0.3);
+    box-shadow: var(--glow-intensity) hsla(var(--anime-glow), 0.4);
+  }
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+  .glass-minimal {
+    background: hsla(var(--minimal-surface), 0.8);
+    backdrop-filter: blur(10px);
+    border: 1px solid hsl(var(--minimal-border));
+  }
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+  .glass-cyber {
+    background: linear-gradient(135deg, 
+      hsla(var(--cyber-primary), 0.1) 0%, 
+      hsla(var(--cyber-secondary), 0.05) 100%);
+    backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid hsla(var(--cyber-primary), 0.4);
+    box-shadow: var(--glow-intensity) hsla(var(--cyber-glow), 0.6);
+  }
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+  /* Neon Glow Effects */
+  .neon-anime {
+    box-shadow: 
+      0 0 20px hsla(var(--anime-primary), 0.5),
+      0 0 40px hsla(var(--anime-primary), 0.3),
+      inset 0 0 20px hsla(var(--anime-primary), 0.1);
+  }
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+  .neon-cyber {
+    box-shadow: 
+      0 0 20px hsla(var(--cyber-primary), 0.8),
+      0 0 40px hsla(var(--cyber-primary), 0.6),
+      0 0 60px hsla(var(--cyber-secondary), 0.4);
+  }
+
+  /* Theme Backgrounds */
+  .bg-anime {
+    background: linear-gradient(135deg, 
+      hsl(320 80% 15%) 0%, 
+      hsl(270 70% 10%) 50%, 
+      hsl(350 60% 8%) 100%);
+  }
+
+  .bg-minimal {
+    background: hsl(var(--minimal-bg));
+  }
+
+  .bg-cyber {
+    background: linear-gradient(135deg, 
+      hsl(var(--cyber-dark)) 0%, 
+      hsl(220 30% 8%) 50%, 
+      hsl(180 20% 5%) 100%);
+  }
+
+  /* Floating Animations */
+  .float-animation {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .particle-anime {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: linear-gradient(45deg, 
+      hsl(var(--anime-primary)), 
+      hsl(var(--anime-secondary)));
+    border-radius: 50%;
+    animation: float-particle 8s linear infinite;
+  }
+
+  /* Glitch Effect */
+  .glitch {
+    animation: glitch 0.3s ease-in-out;
+  }
+
+  /* Digit Flip Animation */
+  .digit-flip {
+    animation: digit-flip 0.6s ease-in-out;
+  }
+
+  /* Pulse Glow */
+  .pulse-glow-anime {
+    animation: pulse-glow-anime 2s ease-in-out infinite alternate;
+  }
+
+  .pulse-glow-cyber {
+    animation: pulse-glow-cyber 1.5s ease-in-out infinite alternate;
+  }
+}
+
+@layer utilities {
+  .smooth-transition {
+    transition: var(--transition-smooth);
+  }
+
+  .fast-transition {
+    transition: var(--transition-fast);
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(5deg); }
+}
+
+@keyframes float-particle {
+  0% { 
+    transform: translateY(100vh) translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { 
+    transform: translateY(-10vh) translateX(100px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@keyframes glitch {
+  0%, 100% { transform: translate(0); }
+  20% { transform: translate(-2px, 2px); }
+  40% { transform: translate(-2px, -2px); }
+  60% { transform: translate(2px, 2px); }
+  80% { transform: translate(2px, -2px); }
+}
+
+@keyframes digit-flip {
+  0% { transform: rotateX(0deg); }
+  50% { transform: rotateX(-90deg); }
+  100% { transform: rotateX(0deg); }
+}
+
+@keyframes pulse-glow-anime {
+  from { 
+    box-shadow: 
+      0 0 20px hsla(var(--anime-primary), 0.5),
+      0 0 40px hsla(var(--anime-primary), 0.3);
+  }
+  to { 
+    box-shadow: 
+      0 0 30px hsla(var(--anime-primary), 0.8),
+      0 0 60px hsla(var(--anime-primary), 0.5);
+  }
+}
+
+@keyframes pulse-glow-cyber {
+  from { 
+    box-shadow: 
+      0 0 20px hsla(var(--cyber-primary), 0.6),
+      0 0 40px hsla(var(--cyber-primary), 0.4);
+  }
+  to { 
+    box-shadow: 
+      0 0 40px hsla(var(--cyber-primary), 0.9),
+      0 0 80px hsla(var(--cyber-secondary), 0.6);
   }
 }
 
