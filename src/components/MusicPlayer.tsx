@@ -14,8 +14,8 @@ export const MusicPlayer = ({ theme }: MusicPlayerProps) => {
   const [volume, setVolume] = useState(50);
   const iframeRef = useRef<HTMLIFrameElement>(null);
 
-  // YouTube video ID extracted from https://youtu.be/bP9gMpl1gyQ?si=nvNzj7RFmjF-ltPF
-  const videoId = 'bP9gMpl1gyQ';
+  // YouTube video ID extracted from https://youtu.be/l-2hOKIrIyI?si=7P40erIMX0za4xtF
+  const videoId = 'l-2hOKIrIyI';
 
   const getThemeClasses = () => {
     switch (theme) {
