@@ -2,6 +2,7 @@ import { useTheme } from '@/hooks/useTheme';
 import { BackgroundSlider } from '@/components/BackgroundSlider';
 import { TimerBox } from '@/components/TimerBox';
 import { ThemeSwitcher } from '@/components/ThemeSwitcher';
+import { MusicPlayer } from '@/components/MusicPlayer';
 
 const Index = () => {
   const { currentTheme, switchTheme } = useTheme();
@@ -19,6 +20,9 @@ const Index = () => {
         currentTheme={currentTheme} 
         onThemeChange={switchTheme} 
       />
+      
+      {/* Music Player */}
+      <MusicPlayer theme={currentTheme} />
     </div>
   );
 };
