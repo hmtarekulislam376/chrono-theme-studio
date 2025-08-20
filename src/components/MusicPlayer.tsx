@@ -8,7 +8,7 @@ interface MusicPlayerProps {
 }
 
 export const MusicPlayer = ({ theme }: MusicPlayerProps) => {
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true);
   const [isMinimized, setIsMinimized] = useState(true);
   const [isMuted, setIsMuted] = useState(false);
   const [volume, setVolume] = useState(50);
@@ -132,7 +132,7 @@ export const MusicPlayer = ({ theme }: MusicPlayerProps) => {
               ref={iframeRef}
               width="320"
               height="180"
-              src={`https://www.youtube.com/embed/${videoId}?enablejsapi=1&autoplay=0&controls=0&loop=1&playlist=${videoId}`}
+              src={`https://www.youtube.com/embed/${videoId}?enablejsapi=1&autoplay=1&controls=0&loop=1&playlist=${videoId}`}
               title="YouTube Music Player"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
