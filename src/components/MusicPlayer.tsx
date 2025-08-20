@@ -12,7 +12,22 @@ export const MusicPlayer = ({ theme }: MusicPlayerProps) => {
   const [isMinimized, setIsMinimized] = useState(true);
   const [isMuted, setIsMuted] = useState(false);
   const [volume, setVolume] = useState(50);
+  const [isLoaded, setIsLoaded] = useState(false);
   const iframeRef = useRef<HTMLIFrameElement>(null);
+
+  useEffect(() => {
+    // Preload and autoplay immediately
+    const timer = setTimeout(() => {
+      setIsLoaded(true);
+      if (iframeRef.current) {
+        iframeRef.current.contentWindow?.postMessage(
+          '{"event":"command","func":"playVideo","args":""}',
+          '*'
+        );
+      }
+    }, 100);
+    return () => clearTimeout(timer);
+  }, []);
 
   // YouTube video ID extracted from https://youtu.be/l-2hOKIrIyI?si=7P40erIMX0za4xtF
   const videoId = 'l-2hOKIrIyI';
@@ -126,17 +141,18 @@ export const MusicPlayer = ({ theme }: MusicPlayerProps) => {
             </Button>
           </div>
 
-          {/* YouTube Player (Hidden) */}
+          {/* YouTube Player (Hidden but Preloaded) */}
           <div className="hidden">
             <iframe
               ref={iframeRef}
               width="320"
               height="180"
-              src={`https://www.youtube.com/embed/${videoId}?enablejsapi=1&autoplay=1&controls=0&loop=1&playlist=${videoId}`}
+              src={`https://www.youtube.com/embed/${videoId}?enablejsapi=1&autoplay=1&mute=0&controls=0&loop=1&playlist=${videoId}&start=0&preload=auto&rel=0&modestbranding=1&playsinline=1`}
               title="YouTube Music Player"
               frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen
+              loading="eager"
             />
           </div>
 
